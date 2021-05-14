@@ -48,7 +48,7 @@ router.post('/', upload.array("files"), (req: Request, res: Response) => {
             let stat = fs.statSync(outputPath);
 
             res.writeHead(200, {
-                'Content-Type': 'application/stl',
+                'Content-Type': 'model/stl',
                 'Content-Length': stat.size
             });
 
