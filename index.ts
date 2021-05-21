@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 
 dotenv.config()
 const app: Application = express()
+const PORT = process.env.PORT;
 
 app.use(express.json())
 app.use(express.urlencoded({extended : true}));
@@ -16,8 +17,8 @@ app.use((req, res, next) => {
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
-app.use('/api', require('./controllers'));
+app.use('/', require('./controllers'));
 
-app.listen(3000, () => {
-    console.log('Listening on port 3000 ...');
+app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT} ...`);
 })
