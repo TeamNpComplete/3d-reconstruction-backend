@@ -10,7 +10,8 @@ let router: Router = express.Router()
 
 let storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const { userId, modelName } = req.body
+        const { userId } = req;
+        const { modelName } = req.body;
         const dir = `uploads/${userId}/${modelName}`;
 
         fs.access(dir, (err) => {
@@ -29,9 +30,8 @@ let storage = multer.diskStorage({
 let upload = multer({storage: storage});
 
 router.post('/', upload.array("files"), (req: Request, res: Response) => {
-    console.log(req.files);
-
-    const { userId, modelName } = req.body;
+    const { userId } = req;
+    const { modelName } = req.body;
     const inputDir = `${shellconfig.uploadDirPath}/${userId}/${modelName}`;
     const outputDir = `${shellconfig.tempDirPath}/${userId}/${modelName}`;
     const outputPath = `${outputDir}/model.stl`;
